@@ -1,0 +1,56 @@
+body,
+html {
+    font-family: "Century Gothic", sans-serif;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    background-color: #014fb3;
+    overflow-x: hidden; /* Prevents horizontal scroll */
+}
+
+.body-container {
+    color: white;
+    font-size: 20px;
+}
+
+.body-container button {
+    font-size: 20px;
+}
+
+.bottom-right-img {
+    opacity: 20%;
+    position: fixed;
+    bottom: -80px;
+    right: -80px;
+    width: 400px;
+    height: auto;
+}
+
+.main-container {
+    width: 600px;
+}
+
+.attendance-form label {
+    color: #014fb3;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.attendance-form button {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#cancelBtn {
+    font-size: 15px;
+    width: 100%;
+}
+
+#goBackBtn {
+    font-size: 15px;
+    width: 300px;
+}
