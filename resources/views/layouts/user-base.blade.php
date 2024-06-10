@@ -18,7 +18,10 @@
     <!-- Sweet Alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    @vite(['resources/js/script.js'])
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    @vite(['resources/js/script.js'])
+    @yield('script')
   </body>
 </html>
