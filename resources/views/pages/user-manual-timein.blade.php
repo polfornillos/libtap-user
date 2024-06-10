@@ -49,6 +49,8 @@
                             icon: 'success',
                             title: 'Success',
                             text: 'Attendance registered successfully',
+                            timer: 2000, // 2 seconds
+                            showConfirmButton: false
                         }).then(() => {
                             sessionStorage.setItem('name', response.name);
                             sessionStorage.setItem('id_number', response.id_number);

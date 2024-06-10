@@ -68,7 +68,7 @@ class AttendanceController extends Controller
             'success' => true,
             'name' => $name,
             'id_number' => $idNumber,
-            'time_in' => Carbon::now()->format('H:i'),
+            'time_in' => Carbon::now()->format('h:i A'),
         ]);
     }
 }
