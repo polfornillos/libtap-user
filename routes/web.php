@@ -12,7 +12,7 @@ Route::get('/', function () {
 
 Route::get('/user-manual-timein', function () {
     return view('pages/user-manual-timein');
-})->name('user-manual-timein');
+})->name('user.manual.timein');
 
 Route::post('/register-attendance', [AttendanceController::class, 'registerAttendance'])->name('register.attendance');
 
