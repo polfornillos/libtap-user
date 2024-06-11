@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Attendance;
 use App\Models\Student;
 use App\Models\Faculty;
+use App\Models\Log;
 use Carbon\Carbon;
 use App\Events\AttendanceRecorded;
+use App\Events\LogRecorded;
 
 class AttendanceController extends Controller
 {
@@ -27,6 +29,7 @@ class AttendanceController extends Controller
                 ->first();
 
             if ($latestAttendance && $latestAttendance->timestamp >= Carbon::now()->subHours(3)) {
+                $this->logActivity('Attendance Attempt', 'User attempted to register attendance within 3 hours', true);
                 return response()->json(['error' => 'You have already timed in within the last 3 hours.'], 400);
             }
         }
@@ -34,6 +37,7 @@ class AttendanceController extends Controller
         if ($userType == 'student') {
             $student = Student::where('id_number', $idNumber)->first();
             if (!$student) {
+                $this->logActivity('Attendance Attempt', 'Student ID not found', true);
                 return response()->json(['error' => 'Student ID not found.'], 404);
             }
             $name = $student->f_name . ' ' . $student->l_name;
@@ -42,6 +46,7 @@ class AttendanceController extends Controller
         } elseif ($userType == 'faculty') {
             $faculty = Faculty::where('id_number', $idNumber)->first();
             if (!$faculty) {
+                $this->logActivity('Attendance Attempt', 'Faculty ID not found', true);
                 return response()->json(['error' => 'Faculty ID not found.'], 404);
             }
             $name = $faculty->f_name . ' ' . $faculty->l_name;
@@ -64,11 +69,25 @@ class AttendanceController extends Controller
 
         event(new AttendanceRecorded($attendance));
 
+        $this->logActivity('Attendance Registered', 'User registered attendance successfully', false);
+
         return response()->json([
             'success' => true,
             'name' => $name,
             'id_number' => $idNumber,
             'time_in' => Carbon::now()->format('h:i A'),
         ]);
+    }
+
+    private function logActivity($action, $description, $error = false)
+    {
+        $log = Log::create([
+            'timestamp' => Carbon::now(),
+            'action' => $action,
+            'description' => $description,
+            'error' => $error
+        ]);
+
+        event(new LogRecorded($log));
     }
 }
