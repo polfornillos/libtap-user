@@ -26,6 +26,22 @@ class FacultyTableSeeder extends Seeder
                 'l_name' => 'Brown',
                 'email' => 'bob.brown@example.com',
             ],
+            [
+                'school_id' => '2023849021',
+                'id_number' => '201802457',
+                'f_name' => 'Charlie',
+                'm_name' => 'E',
+                'l_name' => 'Davis',
+                'email' => 'charlie.davis@example.com',
+            ],
+            [
+                'school_id' => '2039481204',
+                'id_number' => '201902348',
+                'f_name' => 'Dana',
+                'm_name' => 'F',
+                'l_name' => 'Miller',
+                'email' => 'dana.miller@example.com',
+            ],
         ]);
     }
 }
