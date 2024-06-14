@@ -19,3 +19,5 @@ Route::post('/register-attendance', [AttendanceController::class, 'registerAtten
 Route::get('/user-success-timein', function () {
     return view('pages/user-success-timein');
 })->name('user.success.timein');
+
+Route::post('/rfid-timein', [AttendanceController::class, 'rfidTimeIn'])->name('user.rfid.timein');

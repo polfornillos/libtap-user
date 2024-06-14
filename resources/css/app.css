@@ -15,6 +15,7 @@ body {
 .body-container {
     color: white;
     font-size: 20px;
+    height: 100vh;
 }
 
 .body-container button {

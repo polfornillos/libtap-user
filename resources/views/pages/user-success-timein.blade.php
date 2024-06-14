@@ -11,19 +11,29 @@
 </div>
 <img class="bottom-right-img" src="{{ asset('images/School Logo.png') }}" alt="Bottom Right Image" />
 
-
 @endsection
 
 @section('script')
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        var name = sessionStorage.getItem("name");
-        var idNumber = sessionStorage.getItem("id_number");
-        var timeIn = sessionStorage.getItem("time_in");
+        const name = sessionStorage.getItem("name");
+        const schoolId = sessionStorage.getItem("school_id");
+        const idNumber = sessionStorage.getItem("id_number");
+        const timeIn = sessionStorage.getItem("time_in");
 
-        if (name && idNumber && timeIn) {
-            document.getElementById("userInfo").innerText = name + " - " + idNumber;
-            document.getElementById("timeInfo").innerText = "Time In: " + timeIn;
+        if (name && timeIn) {
+            let identifier = '';
+
+            if (schoolId && schoolId !== 'undefined') {
+                identifier = `School ID: ${schoolId}`;
+            } else if (idNumber && idNumber !== 'undefined') {
+                identifier = `ID Number: ${idNumber}`;
+            } else {
+                identifier = 'No ID available';
+            }
+
+            document.getElementById("userInfo").innerText = `${name} - ${identifier}`;
+            document.getElementById("timeInfo").innerText = `Time In: ${timeIn}`;
             sessionStorage.clear();
         } else {
             document.getElementById("userInfo").innerText = "Session data missing!";

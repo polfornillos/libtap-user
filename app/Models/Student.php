@@ -10,11 +10,11 @@ class Student extends Model
     use HasFactory;
 
     protected $fillable = [
-        'school_id', 'id_number', 'f_name', 'm_name', 'l_name', 'email', 'program',
+        'id_number', 'school_id', 'f_name', 'm_name', 'l_name', 'email', 'program',
     ];
 
     public function attendances()
     {
-        return $this->hasMany(Attendance::class, 'id_number', 'id_number');
+        return $this->hasMany(Attendance::class, 'school_id', 'school_id');
     }
 }

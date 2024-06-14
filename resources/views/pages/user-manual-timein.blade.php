@@ -17,7 +17,7 @@
                     </select>
                 </div>
                 <div class="mb-3" id="studentEmployeeNumberContainer">
-                    <label class="form-label">Student/Employee Number</label>
+                    <label class="form-label">School/Employee Number</label>
                     <input type="text" class="form-control" id="studentEmployeeNumber" name="studentEmployeeNumber" />
                 </div>
                 <div class="w-100 d-flex justify-content-end">
@@ -53,7 +53,7 @@
                             showConfirmButton: false
                         }).then(() => {
                             sessionStorage.setItem('name', response.name);
-                            sessionStorage.setItem('id_number', response.id_number);
+                            sessionStorage.setItem('school_id', response.school_id);
                             sessionStorage.setItem('time_in', response.time_in);
                             window.location.href = "{{ route('user.success.timein') }}";
                         });
