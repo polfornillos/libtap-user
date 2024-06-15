@@ -23,17 +23,6 @@ class AttendanceController extends Controller
         $schoolId = $request->studentEmployeeNumber;
         $userType = $request->userType;
 
-        if ($userType !== 'non-teaching') {
-            $latestAttendance = Attendance::where('school_id', $schoolId)
-                ->orderBy('timestamp', 'desc')
-                ->first();
-
-            if ($latestAttendance && $latestAttendance->timestamp >= Carbon::now()->subHours(3)) {
-                $this->logActivity('Attendance Attempt', 'User attempted to register attendance within 3 hours', true);
-                return response()->json(['error' => 'You have already timed in within the last 3 hours.'], 400);
-            }
-        }
-
         if ($userType == 'student') {
             $student = Student::where('school_id', $schoolId)->first();
             if (!$student) {
@@ -57,6 +46,18 @@ class AttendanceController extends Controller
             $idNumber = null;
             $program = 'N/A';
             $schoolId = 'guest_' . time();
+        }
+
+        // Check for recent attendance only if user is student or faculty
+        if ($userType !== 'non-teaching') {
+            $latestAttendance = Attendance::where('school_id', $schoolId)
+                ->orderBy('timestamp', 'desc')
+                ->first();
+
+            if ($latestAttendance && $latestAttendance->timestamp >= Carbon::now()->subHours(3)) {
+                $this->logActivity('Attendance Attempt', 'User attempted to register attendance within 3 hours', true);
+                return response()->json(['error' => 'You have already timed in within the last 3 hours.'], 400);
+            }
         }
 
         $attendance = new Attendance();
