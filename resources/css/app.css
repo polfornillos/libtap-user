@@ -55,3 +55,23 @@ body {
     font-size: 15px;
     width: 300px;
 }
+
+.image-container img {
+    width: 200px;
+}
+
+.icons8-logo {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    opacity: 0.5;
+}
+
+.icons8-logo:hover {
+    opacity: 1;
+}
+
+.icons8-logo img {
+    width: 20px;
+    height: 20px;
+}

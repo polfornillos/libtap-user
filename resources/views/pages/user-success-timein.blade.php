@@ -2,7 +2,10 @@
 
 @section('content')
 <div class="body-container d-flex flex-column align-items-center justify-content-center w-100">
-    <img class="mb-5" src="https://placehold.co/300x300" />
+    {{-- <img class="mb-5" src="https://placehold.co/300x300" /> --}}
+    <div class="image-container mb-4">
+        <img src="{{ asset('images/robot.png') }}" alt="Robot Image">
+    </div>    
     <h5><strong id="userInfo"></strong></h5>
     <h5><strong id="timeInfo"></strong></h5>
     <a href="{{ route('home') }}" class="btn btn-light px-5 mt-5" id="goBackBtn">
@@ -10,6 +13,12 @@
     </a>
 </div>
 <img class="bottom-right-img" src="{{ asset('images/School Logo.png') }}" alt="Bottom Right Image" />
+
+<div class="icons8-logo">
+    <a href="https://icons8.com" target="_blank" title="3D Casual Life by Icons8">
+        <img src="https://img.icons8.com/ios-filled/50/000000/icons8-new-logo.png" alt="Icons 8 logo">
+    </a>
+</div>
 
 @endsection
 
