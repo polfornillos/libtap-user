@@ -116,8 +116,8 @@ class AttendanceController extends Controller
             ->orderBy('timestamp', 'desc')
             ->first();
 
-        if ($latestAttendance && $latestAttendance->timestamp >= Carbon::now()->subHours(3)) {
-            return response()->json(['error' => 'You have already timed in within the last 3 hours.'], 400);
+        if ($latestAttendance && $latestAttendance->timestamp >= Carbon::now()->subHours(1)) {
+            return response()->json(['error' => 'You have already timed in within the last 1 hour.'], 400);
         }
 
         // Register attendance
