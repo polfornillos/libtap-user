@@ -4,7 +4,7 @@
 <div class="body-container d-flex flex-column align-items-center justify-content-center w-100">
     {{-- <img class="mb-5" src="https://placehold.co/300x300" /> --}}
     <div class="image-container mb-4">
-        <img src="{{ asset('images/robot.png') }}" alt="Robot Image">
+        <img src="{{ asset('images/School Logo.png') }}" alt="Robot Image">
     </div>    
     <h5><strong id="userInfo"></strong></h5>
     <h5><strong id="timeInfo"></strong></h5>
