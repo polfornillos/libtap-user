@@ -37,19 +37,23 @@
 @section('script')
 <script>
     $(document).ready(function() {
+        // Handle form submission
         $('#attendanceForm').on('submit', function(event) {
-            event.preventDefault();
+            event.preventDefault(); // Prevent the default form submission
+            
+            // Send an AJAX request to register attendance
             $.ajax({
-                url: '{{ route('register.attendance') }}',
+                url: '{{ route('register.attendance') }}', // URL for the attendance registration route
                 method: 'POST',
-                data: $(this).serialize(),
+                data: $(this).serialize(), // Serialize form data
                 success: function(response) {
                     if (response.success) {
+                        // Show success message and redirect
                         Swal.fire({
                             icon: 'success',
                             title: 'Success',
                             text: 'Attendance registered successfully',
-                            timer: 2000, // 2 seconds
+                            timer: 2000,
                             showConfirmButton: false
                         }).then(() => {
                             sessionStorage.setItem('name', response.name);
@@ -58,6 +62,7 @@
                             window.location.href = "{{ route('user.success.timein') }}";
                         });
                     } else {
+                        // Show error message
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
@@ -66,6 +71,7 @@
                     }
                 },
                 error: function(xhr) {
+                    // Handle errors
                     let errorMsg = 'An error occurred while registering attendance';
                     if (xhr.status === 400 || xhr.status === 404) {
                         errorMsg = xhr.responseJSON.error;
@@ -79,11 +85,13 @@
             });
         });
 
+        // Handle changes in the user type dropdown
         document.getElementById("userType").addEventListener("change", function() {
             var userType = this.value;
             var studentEmployeeNumberContainer = document.getElementById("studentEmployeeNumberContainer");
             var studentEmployeeNumberInput = document.getElementById("studentEmployeeNumber");
 
+            // Toggle visibility of student/employee number input based on user type
             if (userType === "non-teaching") {
                 studentEmployeeNumberContainer.style.display = "none";
                 studentEmployeeNumberInput.disabled = true;
